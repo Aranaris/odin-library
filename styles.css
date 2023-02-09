@@ -51,3 +51,27 @@
   #root, #__next {
     isolation: isolate;
   }
+
+/* actual css */
+.container {
+  display: flex;
+  flex-direction: column;
+}
+.info {
+  background-color: lightgray;
+}
+.book-display {
+  display: grid;
+  background-color: lightskyblue;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 10px;
+  padding: 10px;
+}
+.book {
+  display: flex;
+  flex-direction: column;
+  border-color: black;
+  border-style: solid;
+  border-width: 2px;
+  padding: 5px;
+}
