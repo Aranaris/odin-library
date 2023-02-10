@@ -94,3 +94,17 @@ h3.book-display-header {
   margin: 20px 0;
   border-radius: 10px;
 }
+form.new-book-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(50px, auto));
+  grid-gap: 10px;
+}
+
+form.new-book-form label {
+  grid-column: 1 / 2;
+}
+
+form.new-book-form input,
+form.new-book-form button {
+  grid-column: 2 / 3;
+}

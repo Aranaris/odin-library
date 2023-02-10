@@ -42,6 +42,44 @@ function updateBookDisplay () {
     }
 }
 
+function userAddNewBook () {
+    const newBookSection = document.querySelector(".new-book-section");
+    newBookSection.replaceChildren();
+
+    let addNewBookForm = document.createElement('form');
+    addNewBookForm.className = 'new-book-form';
+    addNewBookForm.name = 'addNewBook';
+    addNewBookForm.method = 'POST';
+    addNewBookForm.action = '/addnewbook';
+    
+    /* adding inputs to form */
+    let titleLabel = document.createElement('label');
+    titleLabel.for = 'title';
+    titleLabel.textContent = 'Book Title: ';
+    let titleInput = document.createElement('input');
+    titleInput.id = 'title';
+    titleInput.type = 'text';
+
+    let authorLabel = document.createElement('label');
+    authorLabel.for = 'author';
+    authorLabel.textContent = 'Book Author: ';
+    let authorInput = document.createElement('input');
+    authorInput.id = 'author';
+    authorInput.type = 'text';
+
+    addNewBookForm.appendChild(titleLabel);
+    addNewBookForm.appendChild(titleInput);
+    addNewBookForm.appendChild(authorLabel);
+    addNewBookForm.appendChild(authorInput);
+
+    newBookSection.appendChild(addNewBookForm);
+}
+
+const addNewBookButton = document.getElementById('show-book-form');
+addNewBookButton.addEventListener('click', () => {
+    userAddNewBook();
+})
+
 const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, true);
 
 const sampleBook = new Book("SampleBook2 with really long title", "New Author", 100, false);
