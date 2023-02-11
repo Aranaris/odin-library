@@ -46,6 +46,9 @@ function userAddNewBook () {
     const newBookSection = document.querySelector(".new-book-section");
     newBookSection.replaceChildren();
 
+    let newBookHeader = document.createElement('h3');
+    newBookHeader.textContent = 'Please fill out the form below:';
+
     let addNewBookForm = document.createElement('form');
     addNewBookForm.className = 'new-book-form';
     addNewBookForm.name = 'addNewBook';
@@ -67,18 +70,76 @@ function userAddNewBook () {
     authorInput.id = 'author';
     authorInput.type = 'text';
 
+    let pageNumLabel = document.createElement('label');
+    pageNumLabel.for = 'pageNum';
+    pageNumLabel.textContent = 'Number of Pages: ';
+    let pageNumInput = document.createElement('input');
+    pageNumInput.id = 'pageNum';
+    pageNumInput.type = 'number';
+
+    let readLabel = document.createElement('label');
+    readLabel.for = 'read';
+    readLabel.textContent = 'Read? ';
+    let readInput = document.createElement('input');
+    readInput.id = 'read';
+    readInput.type = 'checkbox';
+    readInput.value = 'hasRead';
+
+    let submitNewBook = document.createElement('button');
+    submitNewBook.type = 'button';
+    submitNewBook.textContent = 'Submit';
+    submitNewBook.id = 'submit-new';
+
     addNewBookForm.appendChild(titleLabel);
     addNewBookForm.appendChild(titleInput);
     addNewBookForm.appendChild(authorLabel);
     addNewBookForm.appendChild(authorInput);
+    addNewBookForm.appendChild(pageNumLabel);
+    addNewBookForm.appendChild(pageNumInput);
+    addNewBookForm.appendChild(readLabel);
+    addNewBookForm.appendChild(readInput);
+    addNewBookForm.appendChild(submitNewBook);
 
+    newBookSection.appendChild(newBookHeader);
     newBookSection.appendChild(addNewBookForm);
+    
+    /*handling user inputs and adding to library */
+    const title = document.querySelector('#title');
+    const author = document.querySelector('#author');
+    const pageNum = document.querySelector('#pageNum');
+    const readCheckbox = document.querySelector('#read');
+
+    const submitButton = document.querySelector('#submit-new');
+    submitButton.addEventListener('click', () => {
+        const newBook = new Book (title.value, author.value, pageNum.value, readCheckbox.checked);
+        addBookToLibrary(newBook);
+        updateBookDisplay();
+
+        newBookSection.replaceChildren();
+        generateNewBookSection();
+    })
+    
 }
 
-const addNewBookButton = document.getElementById('show-book-form');
-addNewBookButton.addEventListener('click', () => {
-    userAddNewBook();
-})
+function generateNewBookSection() {
+    let newBookSectionHeader = document.createElement('div');
+    newBookSectionHeader.className = 'new-book-header';
+    newBookSectionHeader.textContent = 'Click the button to add a new book to your collection!';
+    let newBookSectionButton = document.createElement('button');
+    newBookSectionButton.id = 'show-book-form';
+    newBookSectionButton.textContent = 'Add New Book';
+
+    const newBookSection = document.querySelector(".new-book-section");
+    newBookSection.appendChild(newBookSectionHeader);
+    newBookSection.appendChild(newBookSectionButton);
+
+    const addNewBookButton = document.getElementById('show-book-form');
+    addNewBookButton.addEventListener('click', () => {
+        userAddNewBook();
+    })
+}
+
+generateNewBookSection();
 
 const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, true);
 
