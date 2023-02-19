@@ -21,6 +21,11 @@ function addBookToLibrary (book) {
     myLibrary.push(book);
 }
 
+function removeBookfromLibrary(libraryIndex) {
+    myLibrary.splice(libraryIndex, 1);
+    updateBookDisplay();
+}
+
 function updateBookDisplay () {
     const bookDisplay = document.querySelector(".book-display");
     bookDisplay.replaceChildren();
@@ -38,7 +43,17 @@ function updateBookDisplay () {
             bookProperty.textContent = `${myLibrary[i][property]}`;
             newBook.appendChild(bookProperty);
         }
+        let removeBookButton = document.createElement('button');
+        removeBookButton.className = 'remove-book-button';
+        removeBookButton.textContent = 'Remove';
+        removeBookButton.dataset.libraryIndex = i;
+        removeBookButton.addEventListener('click', () => {
+            removeBookfromLibrary(removeBookButton.dataset.libraryIndex);
+        })
+        newBook.appendChild(removeBookButton);
+
         bookDisplay.appendChild(newBook);
+
     }
 }
 

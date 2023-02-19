@@ -85,7 +85,12 @@ h3 {
   border-width: 2px;
   padding: 5px;
   min-height: 150px;
+  align-items: center;
 }
+.book > * {
+  text-align: center;
+}
+
 .new-book-section {
   display: flex;
   flex-direction: column;
@@ -93,10 +98,20 @@ h3 {
   background-color: lightgreen;
   align-items: center;
 }
-#show-book-form {
+#show-book-form, .remove-book-button {
   margin: 20px 0;
   border-radius: 10px;
+  background-color: azure;
 }
+
+#show-book-form {
+  padding: 5px 20px;
+}
+
+.remove-book-button {
+  width: 75%;
+}
+
 form.new-book-form {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(50px, auto));
