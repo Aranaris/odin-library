@@ -60,6 +60,11 @@
 }
 .info {
   background-color: lightgray;
+  min-height: 100px;
+  font-size: larger;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
 }
 .book-display {
   display: grid;
@@ -125,4 +130,19 @@ form.new-book-form label {
 form.new-book-form input,
 form.new-book-form button {
   grid-column: 2 / 3;
+}
+
+input[type=checkbox] {
+  vertical-align: middle;
+  position: relative;
+  bottom: 1px;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.author {
+  font-style: italic;
+  margin-bottom: 5px;
 }

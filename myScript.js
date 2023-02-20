@@ -21,6 +21,10 @@ function addBookToLibrary (book) {
     myLibrary.push(book);
 }
 
+function toggleRead (book) {
+    book.read = !book.read;
+}
+
 function removeBookfromLibrary(libraryIndex) {
     myLibrary.splice(libraryIndex, 1);
     updateBookDisplay();
@@ -40,7 +44,28 @@ function updateBookDisplay () {
         for (const property in myLibrary[i]) {
             let bookProperty = document.createElement('div');
             bookProperty.className = `${property}`;
-            bookProperty.textContent = `${myLibrary[i][property]}`;
+            if (property === 'read') {
+                let readLabel = document.createElement('label');
+                readLabel.for = `read-${i}`;
+                readLabel.textContent = 'Read: ';
+                let readInput = document.createElement('input');
+                readInput.id = `read-${i}`;
+                readInput.type = 'checkbox';
+                readInput.value = 'hasRead';
+                readInput.checked = myLibrary[i][property];
+                readInput.addEventListener('change', function() {
+                    toggleRead(myLibrary[i]);
+                    console.log(myLibrary[i]);
+                });
+
+                bookProperty.appendChild(readLabel);
+                bookProperty.appendChild(readInput);
+            
+            } else if (property === 'pages') {
+                bookProperty.textContent = `${myLibrary[i][property]} pgs`;
+            } else {
+                bookProperty.textContent = `${myLibrary[i][property]}`;
+            }
             newBook.appendChild(bookProperty);
         }
         let removeBookButton = document.createElement('button');
@@ -163,5 +188,4 @@ const sampleBook = new Book("SampleBook2 with really long title", "New Author", 
 addBookToLibrary(theHobbit);
 addBookToLibrary(sampleBook);
 
-// setTimeout(() => { updateBookDisplay(); }, 5000);
 updateBookDisplay();
